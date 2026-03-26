@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SecureVote – A secure digital voting platform with multi-factor authentication">
+    <title>SecureVote – Secure Digital Voting System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div id="toast-container"></div>
+
+    <!-- NAV -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-brand"><span class="nav-icon">🗳️</span><span class="nav-title">SecureVote</span></div>
+        <div class="nav-links" id="nav-links">
+            <a href="#" class="nav-link active" data-page="landing" onclick="navigateTo('landing')">Home</a>
+            <a href="#" class="nav-link" data-page="register" onclick="navigateTo('register')">Register</a>
+            <a href="#" class="nav-link" data-page="login" onclick="navigateTo('login')">Vote</a>
+            <a href="#" class="nav-link" data-page="results" onclick="navigateTo('results')">Results</a>
+            <a href="#" class="nav-link nav-admin" data-page="admin" onclick="navigateTo('admin')">Admin</a>
+        </div>
+        <button class="nav-hamburger" onclick="toggleMobileMenu()">☰</button>
+    </nav>
+
+    <!-- LANDING -->
+    <section id="page-landing" class="page active">
+        <div class="hero">
+            <div class="hero-particles" id="particles"></div>
+            <div class="hero-container">
+                <div class="hero-left">
+                    <div class="hero-badge">🔒 Multi-Factor Authenticated</div>
+                    <h1 class="hero-title">Secure <span class="gradient-text">Digital Voting</span><br>for the Modern Era</h1>
+                    <p class="hero-subtitle">A tamper-resistant, transparent voting platform with Voter ID verification, OTP authentication, and biometric face recognition.</p>
+                    <div class="hero-actions">
+                        <button class="btn btn-primary btn-lg" onclick="navigateTo('register')"><span>Register to Vote</span><span class="btn-arrow">→</span></button>
+                        <button class="btn btn-outline btn-lg" onclick="navigateTo('login')"><span>Cast Your Vote</span></button>
+                    </div>
+                </div>
+                <div class="hero-right">
+                    <div class="hero-visual">
+                        <img src="img/hero.png" alt="Secure Voting Illustration">
+                        <div class="visual-glow"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-stats-wrapper">
+                <div class="hero-stats">
+                    <div class="stat-card"><div class="stat-number" id="stat-voters">0</div><div class="stat-label">Registered Voters</div></div>
+                    <div class="stat-card"><div class="stat-number" id="stat-votes">0</div><div class="stat-label">Votes Cast</div></div>
+                    <div class="stat-card"><div class="stat-number">3</div><div class="stat-label">Auth Layers</div></div>
+                    <div class="stat-card"><div class="stat-number">256</div><div class="stat-label">Bit Encryption</div></div>
+                </div>
+            </div>
+        </div>
+        <div class="features-section">
+            <h2 class="section-title">How It <span class="gradient-text">Works</span></h2>
+            <div class="features-grid">
+                <div class="feature-card" style="--delay:0.1s"><div class="feature-icon">📝</div><h3>Register</h3><p>Create your account with Voter ID, phone, and optional face enrollment</p></div>
+                <div class="feature-card" style="--delay:0.2s"><div class="feature-icon">🔑</div><h3>Voter ID Check</h3><p>Your identity is verified against the secure voter database</p></div>
+                <div class="feature-card" style="--delay:0.3s"><div class="feature-icon">📱</div><h3>OTP Verification</h3><p>One-time password sent to your registered phone number</p></div>
+                <div class="feature-card" style="--delay:0.4s"><div class="feature-icon">👤</div><h3>Face Recognition</h3><p>Biometric verification ensures only you can cast your vote</p></div>
+                <div class="feature-card" style="--delay:0.5s"><div class="feature-icon">🗳️</div><h3>Cast Vote</h3><p>Select your candidate in a secure voting interface</p></div>
+                <div class="feature-card" style="--delay:0.6s"><div class="feature-icon">🔐</div><h3>Encrypted Storage</h3><p>Your vote is SHA-256 encrypted before storage</p></div>
+            </div>
+        </div>
+        <div class="architecture-section">
+            <h2 class="section-title">System <span class="gradient-text">Architecture</span></h2>
+            <div class="architecture-container">
+                <div class="arch-layer" style="--d:0.1s">
+                    <div class="arch-icon">🌐</div>
+                    <div class="arch-info">
+                        <h4>Frontend Layer</h4>
+                        <p>Modern SPA built with HTML5 & Vanilla JS. Handles camera integration and JWT-based session state.</p>
+                    </div>
+                </div>
+                <div class="arch-connector"></div>
+                <div class="arch-layer" style="--d:0.2s">
+                    <div class="arch-icon">⚡</div>
+                    <div class="arch-info">
+                        <h4>Backend API</h4>
+                        <p>Flask REST API managing secure endpoints, token validation, and multi-stage auth flow.</p>
+                    </div>
+                </div>
+                <div class="arch-connector"></div>
+                <div class="arch-layer" style="--d:0.3s">
+                    <div class="arch-icon">👁️</div>
+                    <div class="arch-info">
+                        <h4>Biometric Engine</h4>
+                        <p>OpenCV-powered LBPH recognizer with CLAHE preprocessing and Eye-Detection alignment.</p>
+                    </div>
+                </div>
+                <div class="arch-connector"></div>
+                <div class="arch-layer" style="--d:0.4s">
+                    <div class="arch-icon">🛡️</div>
+                    <div class="arch-info">
+                        <h4>Security & ML</h4>
+                        <p>Real-time Fraud Detection using Isolation Forests and SHA-256 vote encryption.</p>
+                    </div>
+                </div>
+                <div class="arch-connector"></div>
+                <div class="arch-layer" style="--d:0.5s">
+                    <div class="arch-icon">🗄️</div>
+                    <div class="arch-info">
+                        <h4>Data Tier</h4>
+                        <p>SQLite database with SQLAlchemy ORM storing anonymized voter identities and hashed results.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- REGISTRATION -->
+    <section id="page-register" class="page">
+        <div class="form-container">
+            <div class="form-card registration-card glass-card">
+                <div class="form-header"><div class="form-icon">📝</div><h2>Voter Registration</h2><p>Register with your identity details to participate</p></div>
+                <form id="register-form" onsubmit="handleRegister(event)">
+                    <div class="registration-layout">
+                        <div class="registration-fields">
+                            <div class="form-group">
+                                <label for="reg-name">Full Name (CAPS Only)</label>
+                                <div class="input-wrapper">
+                                    <span class="input-icon">👤</span>
+                                    <input type="text" id="reg-name" placeholder="ENTER YOUR FULL NAME" style="text-transform: uppercase;" required oninput="this.value = this.value.toUpperCase()">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="reg-voter-image">Voter Image</label>
+                                <div class="input-wrapper">
+                                    <span class="input-icon">📸</span>
+                                    <input type="file" id="reg-voter-image" accept="image/*" required onchange="handleImagePreview(this, 'reg-image-preview')">
+                                </div>
+                                <div id="reg-image-preview" class="image-preview hidden"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="reg-phone">Phone Number (+91...)</label>
+                                <div class="input-wrapper">
+                                    <span class="input-icon">📱</span>
+                                    <input type="tel" id="reg-phone" name="phone" placeholder="" pattern="^\+91\d{10}$" title="Phone number must start with +91 followed by 10 digits" required oninput="validatePhone(this)">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="reg-email">Email Address (@gmail.com)</label>
+                                <div class="input-wrapper">
+                                    <span class="input-icon">📧</span>
+                                    <input type="email" id="reg-email" name="email" placeholder="" pattern=".*@gmail\.com$" title="Email must be a valid @gmail.com address" required oninput="validateEmail(this)">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="registration-face">
+                            <label>Face Recognition Enrollment</label>
+                            <div class="face-enroll-section">
+                                <video id="reg-video" class="face-video hidden" autoplay muted></video>
+                                <canvas id="reg-canvas" class="hidden"></canvas>
+                                <div id="reg-face-status" class="face-status"><span class="face-icon">📷</span><span>No face enrolled</span></div>
+                                <div class="face-buttons">
+                                    <button type="button" class="btn btn-sm btn-outline" onclick="startFaceEnroll()">Start Camera</button>
+                                    <button type="button" class="btn btn-sm btn-primary hidden" id="capture-face-btn" onclick="captureFace()">Capture Face</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full" id="register-btn"><span>Register</span><span class="btn-arrow">→</span></button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- AUTH FLOW -->
+    <section id="page-login" class="page">
+        <div class="auth-container">
+            <div class="auth-progress">
+                <div class="auth-step active" id="step-1"><div class="step-circle">1</div><div class="step-label">Identify</div></div>
+                <div class="step-line" id="line-1"></div>
+                <div class="auth-step" id="step-2"><div class="step-circle">2</div><div class="step-label">Select</div></div>
+                <div class="step-line" id="line-2"></div>
+                <div class="auth-step" id="step-3"><div class="step-circle">✓</div><div class="step-label">Authenticate & Vote</div></div>
+            </div>
+
+            <!-- Step 1: Identification -->
+            <div class="auth-panel active" id="panel-voter-id">
+                <div class="glass-card">
+                    <!-- Image Identification View -->
+                    <div id="view-identify-image">
+                        <div class="form-header">
+                            <div class="form-icon">📸</div>
+                            <h2>Voter Identification</h2>
+                            <p>Upload the voter image used during registration to begin</p>
+                        </div>
+                        <form onsubmit="handleVoterIdentify(event)">
+                            <div class="form-group">
+                                <label for="login-voter-image">Voter Image</label>
+                                <div class="input-wrapper">
+                                    <span class="input-icon">📸</span>
+                                    <input type="file" id="login-voter-image" accept="image/*" required onchange="handleImagePreview(this, 'login-image-preview')">
+                                </div>
+                                <div id="login-image-preview" class="image-preview hidden"></div>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-full">Verify Identity →</button>
+                            <button type="button" class="btn btn-sm btn-outline btn-full mt-2" onclick="toggleIdentifyMode('email')">Identify via Email instead</button>
+                        </form>
+                    </div>
+
+                    <!-- Email Identification View (Hidden by default) -->
+                    <div id="view-identify-email" class="hidden">
+                        <div class="form-header">
+                            <div class="form-icon">📧</div>
+                            <h2>Email Identification</h2>
+                            <p>Enter your registered email address to begin</p>
+                        </div>
+                        <form onsubmit="handleEmailIdentify(event)">
+                            <div class="form-group">
+                                <label for="login-voter-email">Registered Email</label>
+                                <div class="input-wrapper">
+                                    <span class="input-icon">📧</span>
+                                    <input type="email" id="login-voter-email" placeholder="name@example.com" required>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-full">Find Voter Record →</button>
+                            <button type="button" class="btn btn-sm btn-outline btn-full mt-2" onclick="toggleIdentifyMode('image')">Back to Image Upload</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="panel-otp" class="hidden"></div>
+            <div id="panel-voter-image" class="hidden"></div>
+
+            <!-- Step 2: Voting (Selection) -->
+            <div class="auth-panel" id="panel-voting">
+                <div class="glass-card voting-card"><div class="form-header"><div class="form-icon">🗳️</div><h2>Select Your Candidate</h2><p>Choose your representative. You will be asked for biometric verification to finalize.</p></div>
+                <div id="candidates-list" class="candidates-grid"></div>
+                <button type="button" class="btn btn-primary btn-full btn-lg" id="submit-selection-btn" onclick="confirmCandidateSelection()" disabled><span>Confirm Selection →</span></button></div>
+            </div>
+
+            <!-- Step 3: Authenticate (Face or OTP) -->
+            <div class="auth-panel" id="panel-face">
+                <div class="glass-card">
+                    <div class="form-header">
+                        <div class="form-icon">🛡️</div>
+                        <h2>Authenticate to Vote</h2>
+                        <p>Choose your verification method to finalize your ballot</p>
+                    </div>
+
+                    <!-- Method Selection -->
+                    <div id="auth-method-selection" class="method-selection">
+                        <div class="method-card" onclick="showFaceVerification()">
+                            <div class="method-icon">👤</div>
+                            <div class="method-name">Face Recognition</div>
+                            <p>Verify identity using your registered biometrics</p>
+                        </div>
+                        <div class="method-card" onclick="showOTPVerification()">
+                            <div class="method-icon">📧</div>
+                            <div class="method-name">Email OTP</div>
+                            <p>Get a one-time code sent to your registered Gmail</p>
+                        </div>
+                    </div>
+
+                    <!-- Face Verification Path -->
+                    <div id="section-face-verify" class="hidden">
+                        <div class="face-verify-section">
+                            <div class="face-video-wrapper">
+                                <video id="face-verify-video" class="face-video" autoplay muted></video>
+                                <canvas id="face-verify-canvas" class="face-overlay-canvas"></canvas>
+                                <div class="face-scanning-overlay" id="face-scanning"><div class="scan-line"></div></div>
+                            </div>
+                            <div id="face-verify-status" class="face-status"><span class="spinner"></span><span>Initializing camera...</span></div>
+                            <button type="button" class="btn btn-primary btn-full btn-lg" id="face-verify-btn" onclick="verifyFace()">
+                                <span class="lock-icon">🔐</span> <span>Verify & Cast Encrypted Vote</span>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline btn-full mt-2" onclick="backToAuthSelection()">← Change Method</button>
+                        </div>
+                    </div>
+
+                    <!-- OTP Verification Path -->
+                    <div id="section-otp-verify" class="hidden">
+                        <div class="otp-verify-section">
+                            <div class="form-group">
+                                <label>Enter 6-Digit OTP</label>
+                                
+                                <!-- Debug Display (for Simulation Mode) -->
+                                <div id="debug-otp-display" class="hidden">
+                                    <div class="otp-debug-box">
+                                        <div class="otp-debug-label">SIMULATION CODE:</div>
+                                        <div id="debug-otp-code" class="otp-debug-code">------</div>
+                                    </div>
+                                </div>
+
+                                <div class="otp-input-container">
+                                    <input type="text" id="voting-otp-input" maxlength="6" placeholder="000000" class="otp-field-large">
+                                </div>
+                                <p class="form-help">Code sent to your registered @gmail.com</p>
+                            </div>
+                            <button type="button" class="btn btn-primary btn-full btn-lg" id="otp-verify-btn" onclick="verifyVotingOTP()">
+                                <span class="lock-icon">🔐</span> <span>Verify & Cast Encrypted Vote</span>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline btn-full mt-2" onclick="backToAuthSelection()">← Change Method</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Success -->
+            <div class="auth-panel" id="panel-success">
+                <div class="glass-card success-card">
+                    <div class="success-animation"><div class="success-checkmark"><div class="check-icon">✓</div></div></div>
+                    <h2>Vote Recorded Successfully!</h2>
+                    <p class="success-message">Your vote has been encrypted and securely stored.</p>
+                    <div class="vote-receipt" id="vote-receipt"></div>
+                    <button class="btn btn-outline btn-full mt-2" onclick="navigateTo('landing')">Return to Home</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RESULTS -->
+    <section id="page-results" class="page">
+        <div class="results-container">
+            <div id="results-password-panel" class="glass-card result-auth-card">
+                <div class="form-header"><div class="form-icon">🔒</div><h2>Restricted Access</h2><p>Entering election results requires the administration password</p></div>
+                <form onsubmit="handleResultsAuth(event)">
+                    <div class="form-group"><label for="results-pass">Password</label><div class="input-wrapper"><span class="input-icon">🔒</span><input type="password" id="results-pass" placeholder="Enter password" required></div></div>
+                    <button type="submit" class="btn btn-primary btn-full">Unlock Results</button>
+                </form>
+            </div>
+            <div id="results-main-panel" class="glass-card hidden">
+                <div class="form-header"><div class="form-icon">📊</div><h2>Election Results</h2><p id="results-status">Loading results...</p></div>
+                <div id="results-content"><div class="loading-spinner"><div class="spinner"></div><p>Fetching results...</p></div></div>
+                <button class="btn btn-outline btn-full mt-2" onclick="navigateTo('landing')">Back to Home</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ADMIN -->
+    <section id="page-admin" class="page">
+        <div class="admin-container">
+            <div id="admin-login-panel" class="glass-card">
+                <div class="form-header"><div class="form-icon">🛡️</div><h2>Admin Access</h2><p>Enter administrator credentials</p></div>
+                <form onsubmit="handleAdminLogin(event)">
+                    <div class="form-group"><label for="admin-user">Username</label><div class="input-wrapper"><span class="input-icon">👤</span><input type="text" id="admin-user" placeholder="Admin username" required></div></div>
+                    <div class="form-group"><label for="admin-pass">Password</label><div class="input-wrapper"><span class="input-icon">🔒</span><input type="password" id="admin-pass" placeholder="Admin password" required></div></div>
+                    <button type="submit" class="btn btn-primary btn-full">Login as Admin</button>
+                </form>
+            </div>
+            <div id="admin-dashboard" class="hidden">
+                <div class="admin-header"><h2>🛡️ Election Dashboard</h2><button class="btn btn-sm btn-outline" onclick="adminLogout()">Logout</button></div>
+                <div class="admin-stats-grid" id="admin-stats"></div>
+                
+                <div class="admin-controls glass-card">
+                    <h3>Election Controls</h3>
+                    <div class="control-buttons">
+                        <button class="btn btn-primary" id="btn-start-election" onclick="startElection()">▶️ Start Election</button>
+                        <button class="btn btn-warning" id="btn-stop-election" onclick="stopElection()">⏹️ Stop Election</button>
+                        <button class="btn btn-danger" onclick="resetElection()">🔄 Reset Election</button>
+                        <button class="btn btn-outline" onclick="refreshAdminStats()">📊 Refresh Stats</button>
+                    </div>
+                </div>
+                
+                <div class="admin-danger glass-card">
+                    <h3>⚠️ Danger Zone</h3>
+                    <div class="form-group">
+                        <label for="admin-delete-voter-image">Delete Voter by Registration Image</label>
+                        <div class="input-wrapper">
+                            <span class="input-icon">📸</span>
+                            <input type="file" id="admin-delete-voter-image" accept="image/*" onchange="handleAdminDeleteVoter(this)">
+                        </div>
+                        <p style="font-size:0.8rem;color:var(--text-muted);margin-top:0.5rem">Upload a voter's original image to permanently delete their record and any votes cast.</p>
+                    </div>
+                </div>
+                <div class="admin-results glass-card"><h3>Candidate Standings</h3><div id="admin-candidates-chart"></div></div>
+                
+                <div class="admin-candidates-management glass-card">
+                    <h3>Manage Candidates</h3>
+                    <div class="candidate-management-layout">
+                        <!-- Add Candidate Form -->
+                        <div class="add-candidate-form">
+                            <h4>Add New Candidate</h4>
+                            <form onsubmit="handleAddCandidate(event)" id="form-add-candidate">
+                                <div class="form-group">
+                                    <label for="new-cand-name">Candidate Name</label>
+                                    <input type="text" id="new-cand-name" placeholder="e.g., Jane Doe" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="new-cand-party">Party Name</label>
+                                    <input type="text" id="new-cand-party" placeholder="e.g., Independent" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="new-cand-symbol">Symbol (Emoji)</label>
+                                    <div class="emoji-picker-container">
+                                        <input type="text" id="new-cand-symbol" placeholder="Select an emoji" readonly required>
+                                        <div class="emoji-palette" id="emoji-palette">
+                                            <span onclick="selectEmoji('🌟')">🌟</span><span onclick="selectEmoji('🌿')">🌿</span><span onclick="selectEmoji('💻')">💻</span><span onclick="selectEmoji('🤝')">🤝</span><span onclick="selectEmoji('🏗️')">🏗️</span><span onclick="selectEmoji('☀️')">☀️</span><span onclick="selectEmoji('🍎')">🍎</span><span onclick="selectEmoji('⚖️')">⚖️</span><span onclick="selectEmoji('🦁')">🦁</span><span onclick="selectEmoji('🚲')">🚲</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="new-cand-desc">Description</label>
+                                    <input type="text" id="new-cand-desc" placeholder="Brief campaign message" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-full">➕ Add Candidate</button>
+                            </form>
+                        </div>
+                        
+                        <!-- Existing Candidates List -->
+                        <div class="existing-candidates">
+                            <h4>Current Candidates</h4>
+                            <div id="admin-manage-candidates-list" class="manage-candidates-grid">
+                                <!-- Populated by JS -->
+                                <p>Loading candidates...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="admin-voters glass-card"><h3>Registered Voters</h3><div class="table-wrapper"><table id="voters-table"><thead><tr><th>Name</th><th>Voter ID</th><th>Phone</th><th>Email</th><th>Face</th><th>Voted</th><th>Status</th><th>Registered</th></tr></thead><tbody id="voters-tbody"></tbody></table></div></div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer"><div class="footer-content"><span>🗳️ SecureVote © 2026</span><span class="footer-sep">|</span><span>SHA-256 Encrypted • JWT Secured • Multi-Factor Auth</span></div></footer>
+    <script src="/js/app.js?v=2"></script>
+</body>
+</html>
